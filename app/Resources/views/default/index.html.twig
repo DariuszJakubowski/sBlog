@@ -2,12 +2,16 @@
 
 {% block body %}
     <h1>sBlog</h1>
-    {% for i in 0..100 %}
-       
-        <h2>{{ i }} ---- {{ posts[i].title }}</h2>
-        <h3>{{ i }} ---- {{ posts[i].lead }}</h3>
-        <p>{{ i }} ---- {{ posts[i].content }}</p>
-        
-        {% endfor %}
+    {% for post in posts %}
+
+        <h2><a href="{{ path('app_default_show', { 'id' : post.id }) }}">{{ post.title }}</a></h2>
+        <h3>{{ post.lead }}</h3>
+
+
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(posts) }}
+    </div>
 {% endblock %}
 

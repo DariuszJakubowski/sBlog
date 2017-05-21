@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>{{ post.title }} <span class="pull-right">{{ post.createdAt | date('Y.m.d') }}</span></h1>
+    <h2>{{ post.lead }}</h2>
+    <p>{{ post.content }}</p>
+    <p><a href="{{ path('homepage') }}">Powrót do strony głównej</a></p
+    <hr>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+
+
+    {% for flash_message in app.session.flashBag.get('notice') %}
+        <div class="flash-notice">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    
+    <div style="clear: both"></div>
+    {#logika: komentarze else brak komen#}
+    {% for comment in post.comments %}
+        <div class="media">
+            <div class="media-left">
+                {#                <img src="" class="media-objectc" style="width:auto">#}
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading"> {{ comment.user }}
+                    <small>
+                        <i>Dodano: {{ comment.createdAt | date('Y.m.d | G:i') }}</i>
+                    </small>
+                </h4>
+                <p>{{ comment.content }}</p>
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}

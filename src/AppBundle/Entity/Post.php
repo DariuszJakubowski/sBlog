@@ -166,4 +166,74 @@ class Post
     {
         return $this->createdAt;
     }
+    
+    public function __toString() 
+    {
+        return $this->title;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Post
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
